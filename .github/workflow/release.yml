@@ -1,0 +1,24 @@
+name: Gradle CI/CD
+
+on:
+  push:
+    tags:
+      - v1.*
+
+jobs:
+  gradle-release-jar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Run the Gradle package task
+        run: gradle shadowjar
+      - name: Release packed jar
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
