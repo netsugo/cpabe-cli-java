@@ -1,7 +1,11 @@
 package com.github.netsugo.cpabe.cli;
 
-import picocli.CommandLine.*;
+import java.io.IOException;
 import java.util.concurrent.Callable;
+
+import co.junwei.cpabe.Cpabe;
+
+import picocli.CommandLine.*;
 
 @Command(name = "decrypt", mixinStandardHelpOptions = true, description = { Description.Command.decrypt })
 public class Decrypt implements Callable<Integer> {
@@ -9,14 +13,18 @@ public class Decrypt implements Callable<Integer> {
     private String encrypted;
 
     @Option(names = { "-P", "--public" }, required = true, description = { Description.publicKey })
-    private String pubkey;
+    private String pubfile;
 
     @Option(names = { "-p", "--private" }, required = true, description = { Description.privateKey })
-    private String privkey;
+    private String privfile;
+
+    @Option(names = { "-o", "--out" }, required = true)
+    private String decfile;
 
     @Override
-    public Integer call() {
-        System.out.println(encrypted + " " + pubkey + " " + privkey);
+    public Integer call() throws IOException, Exception {
+        var cpabe = new Cpabe();
+        cpabe.dec(pubfile, privfile, encrypted, decfile);
         return ExitCode.OK;
     }
 }

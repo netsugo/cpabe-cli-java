@@ -24,6 +24,12 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     mavenCentral()
     jcenter()
+    maven {
+        url 'https://jitpack.io'
+    }
+    flatDir {
+        dirs "lib"
+    }
 }
 
 mainClassName = "App"
@@ -36,6 +42,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     implementation 'info.picocli:picocli:4.6.1'
+    implementation 'com.github.junwei-wang.cpabe:cpabe-api:0e71de17ed'
+    implementation 'it.unisa.dia.gas:jpbc-api:1.2.1'
+    implementation 'it.unisa.dia.gas:jpbc-plaf:1.2.1'
 }
 
 // Define the main class for the application

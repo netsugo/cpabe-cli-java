@@ -135,6 +135,7 @@ flycheck_*.el
 
 # Package Files #
 *.jar
+!lib/*.jar
 *.war
 *.nar
 *.ear
