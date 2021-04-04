@@ -12,7 +12,7 @@ public class Setup implements Callable<Integer> {
     @Option(names = { "-P", "--public" }, required = true, description = { "output of " + Description.publicKey })
     private String pubfile;
 
-    @Option(names = { "-m", "--master" }, required = true, description = { "output of" + Description.master })
+    @Option(names = { "-m", "--master" }, required = true, description = { "output of " + Description.master })
     private String mskfile;
 
     @Override
