@@ -1,9 +1,6 @@
 package com.github.netsugo.cpabe;
 
-import co.junwei.bswabe.Bswabe;
-import co.junwei.bswabe.BswabeMsk;
-import co.junwei.bswabe.BswabePub;
-import co.junwei.bswabe.SerializeUtils;
+import co.junwei.bswabe.*;
 import co.junwei.cpabe.AESCoder;
 import co.junwei.cpabe.Common;
 import co.junwei.cpabe.policy.LangPolicy;
@@ -27,7 +24,7 @@ public final class Cpabe2 {
     public static byte[] keygen(byte[] publicKey, byte[] masterKey, String attribute) throws NoSuchAlgorithmException {
         var pub = SerializeUtils.unserializeBswabePub(publicKey);
         var msk = SerializeUtils.unserializeBswabeMsk(pub, masterKey);
-        var parsedAttribute = LangPolicy.parseAttribute(attribute);
+        var parsedAttribute = LangPolicy2.parseAttribute(attribute);
         var prv = Bswabe.keygen(pub, msk, parsedAttribute);
         return SerializeUtils.serializeBswabePrv(prv);
     }
