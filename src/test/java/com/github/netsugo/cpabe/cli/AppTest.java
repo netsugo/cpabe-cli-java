@@ -3,12 +3,28 @@
  */
 package com.github.netsugo.cpabe.cli;
 
+import com.github.netsugo.cpabe.Cpabe2;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class AppTest {
-    @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+    @Test
+    public void testEncDecSuccess() throws Exception {
+        var plain = "Hello";
+        var attr = "alice";
+        var policy = "bob alice 1of2";
+
+        var setup = Cpabe2.setup();
+
+        var master = setup.master;
+        var pubkey = setup.pubkey;
+        var secret = Cpabe2.keygen(pubkey, master, attr);
+
+        var encrypted = Cpabe2.encrypt(pubkey, policy, plain.getBytes());
+        var decrypted = Cpabe2.decrypt(pubkey, secret, encrypted);
+        var result = new String(decrypted);
+
+        assertEquals(plain, result);
     }
 }

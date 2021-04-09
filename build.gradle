@@ -9,6 +9,7 @@
 plugins {
     // Apply the java plugin to add support for Java
     id 'java'
+    id 'jacoco'
 
     // Apply the application plugin to add support for building an application
     id 'application'
@@ -68,3 +69,11 @@ jar {
 shadowJar {
     classifier null
 }
+jacocoTestReport {
+    sourceSets sourceSets.main
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+test.finalizedBy jacocoTestReport
