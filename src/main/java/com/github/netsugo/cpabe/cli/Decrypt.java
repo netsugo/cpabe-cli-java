@@ -13,11 +13,11 @@ public class Decrypt implements Callable<Integer> {
     @Option(names = {"-i", "--in"}, description = {Description.encrypted})
     private String encrypted;
 
-    @Option(names = {"-P", "--public"}, required = true, description = {Description.publicKey})
+    @Option(names = {"-p", "--public"}, required = true, description = {Description.publicKeyPath})
     private String pubfile;
 
-    @Option(names = {"-p", "--private"}, required = true, description = {Description.privateKey})
-    private String privfile;
+    @Option(names = {"-s", "--secret"}, required = true, description = {Description.secretKeyPath})
+    private String secfile;
 
     @Option(names = {"-o", "--out"})
     private String decfile;
@@ -38,7 +38,7 @@ public class Decrypt implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         var publicKey = Util.readFile(pubfile);
-        var secretKey = Util.readFile(privfile);
+        var secretKey = Util.readFile(secfile);
         var encrypted = Util.readStream(getInputStream());
         var plain = Cpabe2.decrypt(publicKey, secretKey, encrypted);
         Util.writeStream(getOutputStream(), plain);

@@ -1,25 +1,25 @@
 package com.github.netsugo.cpabe.cli;
 
+import com.github.netsugo.cpabe.Cpabe2;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.ExitCode;
+import picocli.CommandLine.Option;
+
 import java.io.*;
 import java.util.concurrent.Callable;
 
-import co.junwei.cpabe.Cpabe;
-
-import com.github.netsugo.cpabe.Cpabe2;
-import picocli.CommandLine.*;
-
-@Command(name = "encrypt", mixinStandardHelpOptions = true, description = { Description.Command.encrypt })
+@Command(name = "encrypt", mixinStandardHelpOptions = true, description = {Description.Command.encrypt})
 public class Encrypt implements Callable<Integer> {
-    @Option(names = { "-i", "--in" }, description = { Description.decrypted })
+    @Option(names = {"-i", "--in"}, description = {Description.decrypted})
     private String plain;
 
-    @Option(names = { "-P", "--public" }, description = { Description.publicKey }, required = true)
+    @Option(names = {"-p", "--public"}, description = {Description.publicKeyPath}, required = true)
     private String pubfile;
 
-    @Option(names = { "-p", "--policy" }, description = { Description.policy, Description.policyExample }, required = true)
+    @Option(names = {"-c", "--policy"}, description = {Description.policy, Description.policyExample}, required = true)
     private String policy;
 
-    @Option(names = { "-o", "--out" })
+    @Option(names = {"-o", "--out"})
     private String encfile;
 
     private InputStream getInputStream() throws FileNotFoundException {

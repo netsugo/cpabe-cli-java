@@ -7,29 +7,27 @@ import java.io.OutputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.Callable;
 
-import co.junwei.cpabe.Cpabe;
-
 import com.github.netsugo.cpabe.Cpabe2;
 import picocli.CommandLine.*;
 
-@Command(name = "keygen", mixinStandardHelpOptions = true, description = { Description.Command.keygen })
+@Command(name = "keygen", mixinStandardHelpOptions = true, description = {Description.Command.keygen})
 public class GenerateKey implements Callable<Integer> {
-    @Option(names = { "-P", "--public" }, required = true, description = { Description.publicKey })
+    @Option(names = {"-p", "--public"}, required = true, description = {Description.publicKeyPath})
     private String pubfile;
 
-    @Option(names = { "-m", "--master" }, required = true, description = { Description.master })
+    @Option(names = {"-m", "--master"}, required = true, description = {Description.masterKeyPath})
     private String mskfile;
 
-    @Option(names = { "-a", "--attr" }, required = true, description = { Description.attr, Description.attrExample })
+    @Option(names = {"-a", "--attr"}, required = true, description = {Description.attr, Description.attrExample})
     private String attribute;
 
-    @Option(names = { "-o", "--out" })
-    private String privfile;
+    @Option(names = {"-o", "--out"})
+    private String secfile;
 
     private OutputStream getOutputStream() throws FileNotFoundException {
-        return privfile == null
+        return secfile == null
                 ? System.out
-                : new FileOutputStream(privfile);
+                : new FileOutputStream(secfile);
     }
 
     @Override
