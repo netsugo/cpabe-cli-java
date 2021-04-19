@@ -20,7 +20,7 @@ public class GenerateKey implements Callable<Integer> {
     @Option(names = { "-m", "--master" }, required = true, description = { Description.master })
     private String mskfile;
 
-    @Option(names = { "-a", "--attr" }, required = true, description = { Description.attr })
+    @Option(names = { "-a", "--attr" }, required = true, description = { Description.attr, Description.attrExample })
     private String attribute;
 
     @Option(names = { "-o", "--out" })
